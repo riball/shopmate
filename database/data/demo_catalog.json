@@ -1,0 +1,1664 @@
+{
+ "note": "Fictional demo catalog: made-up brands, stores and prices. Safe to publish.",
+ "captured_on": "2026-10-20",
+ "stores": {
+  "bazaarlane": {
+   "name": "BazaarLane",
+   "website": "https://example.com/bazaarlane"
+  },
+  "cartwala": {
+   "name": "CartWala",
+   "website": "https://example.com/cartwala"
+  },
+  "dealdeck": {
+   "name": "DealDeck",
+   "website": "https://example.com/dealdeck"
+  }
+ },
+ "products": [
+  {
+   "external_id": "demo-1",
+   "name": "Aurex Pods Lite TWS Earbuds (Black)",
+   "brand": "Aurex",
+   "category": "earphones",
+   "image_url": null,
+   "rating": 4.1,
+   "review_count": 18230,
+   "specs": {
+    "Headphone Type": "True Wireless",
+    "With Microphone": "Yes",
+    "Battery Life": "40 hrs",
+    "Bluetooth Version": "5.3",
+    "Water Resistance": "IPX4",
+    "Active Noise Cancellation": "No",
+    "Fast Charging": "Yes"
+   },
+   "offers": [
+    {
+     "store": "bazaarlane",
+     "price": 1299,
+     "mrp": 1799,
+     "url": "https://example.com/bazaarlane/p/demo-1"
+    },
+    {
+     "store": "dealdeck",
+     "price": 1259,
+     "mrp": 1799,
+     "url": "https://example.com/dealdeck/p/demo-1"
+    },
+    {
+     "store": "cartwala",
+     "price": 1259,
+     "mrp": 1799,
+     "url": "https://example.com/cartwala/p/demo-1"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-2",
+   "name": "Aurex Pods Lite TWS Earbuds (White)",
+   "brand": "Aurex",
+   "category": "earphones",
+   "image_url": null,
+   "rating": 4.1,
+   "review_count": 18230,
+   "specs": {
+    "Headphone Type": "True Wireless",
+    "With Microphone": "Yes",
+    "Battery Life": "40 hrs",
+    "Bluetooth Version": "5.3",
+    "Water Resistance": "IPX4",
+    "Active Noise Cancellation": "No"
+   },
+   "offers": [
+    {
+     "store": "dealdeck",
+     "price": 1349,
+     "mrp": 1799,
+     "url": "https://example.com/dealdeck/p/demo-2"
+    },
+    {
+     "store": "bazaarlane",
+     "price": 1439,
+     "mrp": 1799,
+     "url": "https://example.com/bazaarlane/p/demo-2"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-3",
+   "name": "Sonique Air 3 ANC Earbuds",
+   "brand": "Sonique",
+   "category": "earphones",
+   "image_url": null,
+   "rating": 4.3,
+   "review_count": 9420,
+   "specs": {
+    "Headphone Type": "True Wireless",
+    "With Microphone": "Yes",
+    "Battery Life": "36 hrs",
+    "Bluetooth Version": "5.3",
+    "Active Noise Cancellation": "Yes",
+    "Water Resistance": "IPX5"
+   },
+   "offers": [
+    {
+     "store": "dealdeck",
+     "price": 2799,
+     "mrp": 3799,
+     "url": "https://example.com/dealdeck/p/demo-3"
+    },
+    {
+     "store": "cartwala",
+     "price": 2629,
+     "mrp": 3799,
+     "url": "https://example.com/cartwala/p/demo-3"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-4",
+   "name": "BoltBeat Groove TWS",
+   "brand": "BoltBeat",
+   "category": "earphones",
+   "image_url": null,
+   "rating": 3.9,
+   "review_count": 25610,
+   "specs": {
+    "Headphone Type": "True Wireless",
+    "With Microphone": "Yes",
+    "Battery Life": "30 hrs",
+    "Bluetooth Version": "5.1"
+   },
+   "offers": [
+    {
+     "store": "bazaarlane",
+     "price": 999,
+     "mrp": 1299,
+     "url": "https://example.com/bazaarlane/p/demo-4"
+    },
+    {
+     "store": "dealdeck",
+     "price": 969,
+     "mrp": 1299,
+     "url": "https://example.com/dealdeck/p/demo-4"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-5",
+   "name": "BoltBeat Groove Pro TWS",
+   "brand": "BoltBeat",
+   "category": "earphones",
+   "image_url": null,
+   "rating": 4.0,
+   "review_count": 7310,
+   "specs": {
+    "Headphone Type": "True Wireless",
+    "With Microphone": "Yes",
+    "Microphone": "No",
+    "Battery Life": "45 hrs",
+    "Bluetooth Version": "5.3"
+   },
+   "offers": [
+    {
+     "store": "dealdeck",
+     "price": 1799,
+     "mrp": 2399,
+     "url": "https://example.com/dealdeck/p/demo-5"
+    },
+    {
+     "store": "bazaarlane",
+     "price": 1919,
+     "mrp": 2399,
+     "url": "https://example.com/bazaarlane/p/demo-5"
+    },
+    {
+     "store": "cartwala",
+     "price": 1869,
+     "mrp": 2399,
+     "url": "https://example.com/cartwala/p/demo-5"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-6",
+   "name": "Nimbus Neckband Flex",
+   "brand": "Nimbus",
+   "category": "earphones",
+   "image_url": null,
+   "rating": 4.2,
+   "review_count": 31200,
+   "specs": {
+    "Headphone Type": "Neckband",
+    "With Microphone": "Yes",
+    "Battery Life": "32 hrs",
+    "Bluetooth Version": "5.0",
+    "Water Resistance": "IPX5",
+    "Fast Charging": "Yes"
+   },
+   "offers": [
+    {
+     "store": "cartwala",
+     "price": 899,
+     "mrp": 1199,
+     "url": "https://example.com/cartwala/p/demo-6"
+    },
+    {
+     "store": "dealdeck",
+     "price": 849,
+     "mrp": 1199,
+     "url": "https://example.com/dealdeck/p/demo-6"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-7",
+   "name": "Nimbus Buds Studio ANC",
+   "brand": "Nimbus",
+   "category": "earphones",
+   "image_url": null,
+   "rating": 4.4,
+   "review_count": 5120,
+   "specs": {
+    "Headphone Type": "True Wireless",
+    "With Microphone": "Yes",
+    "Battery Life": "28 hrs",
+    "Bluetooth Version": "5.3",
+    "Active Noise Cancellation": "Yes",
+    "Water Resistance": "IPX4",
+    "Fast Charging": "Yes"
+   },
+   "offers": [
+    {
+     "store": "dealdeck",
+     "price": 3999,
+     "mrp": 5399,
+     "url": "https://example.com/dealdeck/p/demo-7"
+    },
+    {
+     "store": "cartwala",
+     "price": 4079,
+     "mrp": 5399,
+     "url": "https://example.com/cartwala/p/demo-7"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-8",
+   "name": "Kestrel Wave TWS",
+   "brand": "Kestrel",
+   "category": "earphones",
+   "image_url": null,
+   "rating": 5.0,
+   "review_count": 3,
+   "specs": {
+    "Headphone Type": "True Wireless",
+    "With Microphone": "Yes",
+    "Battery Life": "24 hrs"
+   },
+   "offers": [
+    {
+     "store": "bazaarlane",
+     "price": 1499,
+     "mrp": 1999,
+     "url": "https://example.com/bazaarlane/p/demo-8"
+    },
+    {
+     "store": "dealdeck",
+     "price": 1409,
+     "mrp": 1999,
+     "url": "https://example.com/dealdeck/p/demo-8"
+    },
+    {
+     "store": "cartwala",
+     "price": 1409,
+     "mrp": 1999,
+     "url": "https://example.com/cartwala/p/demo-8"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-9",
+   "name": "Kestrel Wave Max TWS",
+   "brand": "Kestrel",
+   "category": "earphones",
+   "image_url": null,
+   "rating": 4.2,
+   "review_count": 2210,
+   "specs": {
+    "Headphone Type": "True Wireless",
+    "Battery Life": "50 hrs",
+    "Bluetooth Version": "5.4",
+    "Water Resistance": "IPX5"
+   },
+   "offers": [
+    {
+     "store": "bazaarlane",
+     "price": 2199,
+     "mrp": 2999,
+     "url": "https://example.com/bazaarlane/p/demo-9"
+    },
+    {
+     "store": "cartwala",
+     "price": 2349,
+     "mrp": 2999,
+     "url": "https://example.com/cartwala/p/demo-9"
+    },
+    {
+     "store": "dealdeck",
+     "price": 2239,
+     "mrp": 2999,
+     "url": "https://example.com/dealdeck/p/demo-9"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-10",
+   "name": "Sonique Studio Wired Earphones",
+   "brand": "Sonique",
+   "category": "earphones",
+   "image_url": null,
+   "rating": 4.0,
+   "review_count": 40210,
+   "specs": {
+    "Headphone Type": "Wired",
+    "With Microphone": "Yes"
+   },
+   "offers": [
+    {
+     "store": "dealdeck",
+     "price": 499,
+     "mrp": 699,
+     "url": "https://example.com/dealdeck/p/demo-10"
+    },
+    {
+     "store": "cartwala",
+     "price": 529,
+     "mrp": 699,
+     "url": "https://example.com/cartwala/p/demo-10"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-11",
+   "name": "Aurex Pods Pro ANC (Midnight Blue)",
+   "brand": "Aurex",
+   "category": "earphones",
+   "image_url": null,
+   "rating": 4.2,
+   "review_count": 8800,
+   "specs": {
+    "Headphone Type": "True Wireless",
+    "With Microphone": "Yes",
+    "Battery Life": "38 hrs",
+    "Bluetooth Version": "5.3",
+    "Active Noise Cancellation": "Yes",
+    "Fast Charging": "Yes"
+   },
+   "offers": [
+    {
+     "store": "cartwala",
+     "price": 3299,
+     "mrp": 4499,
+     "url": "https://example.com/cartwala/p/demo-11"
+    },
+    {
+     "store": "bazaarlane",
+     "price": 3529,
+     "mrp": 4499,
+     "url": "https://example.com/bazaarlane/p/demo-11"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-12",
+   "name": "Tempo Runner Open-Ear Buds",
+   "brand": "Tempo",
+   "category": "earphones",
+   "image_url": null,
+   "rating": 4.0,
+   "review_count": 1430,
+   "specs": {
+    "Headphone Type": "True Wireless",
+    "With Microphone": "Yes",
+    "Battery Life": "20 hrs",
+    "Water Resistance": "IP55"
+   },
+   "offers": [
+    {
+     "store": "dealdeck",
+     "price": 2499,
+     "mrp": 3399,
+     "url": "https://example.com/dealdeck/p/demo-12"
+    },
+    {
+     "store": "cartwala",
+     "price": 2349,
+     "mrp": 3399,
+     "url": "https://example.com/cartwala/p/demo-12"
+    },
+    {
+     "store": "bazaarlane",
+     "price": 2349,
+     "mrp": 3399,
+     "url": "https://example.com/bazaarlane/p/demo-12"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-13",
+   "name": "Vantro V5 5G (Midnight Blue, 128 GB)",
+   "brand": "Vantro",
+   "category": "smartphones",
+   "image_url": null,
+   "rating": 4.3,
+   "review_count": 22100,
+   "specs": {
+    "RAM": "8 GB",
+    "Internal Storage": "128 GB",
+    "Display Type": "AMOLED",
+    "5G": "Yes",
+    "Battery Capacity": "5000 mAh",
+    "Primary Camera": "50MP + 8MP",
+    "Charging": "33W Fast Charging"
+   },
+   "offers": [
+    {
+     "store": "bazaarlane",
+     "price": 17999,
+     "mrp": 24299,
+     "url": "https://example.com/bazaarlane/p/demo-13"
+    },
+    {
+     "store": "cartwala",
+     "price": 17459,
+     "mrp": 24299,
+     "url": "https://example.com/cartwala/p/demo-13"
+    },
+    {
+     "store": "dealdeck",
+     "price": 16919,
+     "mrp": 24299,
+     "url": "https://example.com/dealdeck/p/demo-13"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-14",
+   "name": "Vantro V5 5G (Silver, 256 GB)",
+   "brand": "Vantro",
+   "category": "smartphones",
+   "image_url": null,
+   "rating": 4.3,
+   "review_count": 22100,
+   "specs": {
+    "RAM": "8 GB",
+    "Internal Storage": "256 GB",
+    "Display Type": "AMOLED",
+    "5G": "Yes",
+    "Battery Capacity": "5000 mAh",
+    "Primary Camera": "50MP + 8MP",
+    "Charging": "33W"
+   },
+   "offers": [
+    {
+     "store": "cartwala",
+     "price": 19999,
+     "mrp": 26999,
+     "url": "https://example.com/cartwala/p/demo-14"
+    },
+    {
+     "store": "dealdeck",
+     "price": 19399,
+     "mrp": 26999,
+     "url": "https://example.com/dealdeck/p/demo-14"
+    },
+    {
+     "store": "bazaarlane",
+     "price": 20399,
+     "mrp": 26999,
+     "url": "https://example.com/bazaarlane/p/demo-14"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-15",
+   "name": "Orbix Neo 12 5G",
+   "brand": "Orbix",
+   "category": "smartphones",
+   "image_url": null,
+   "rating": 4.1,
+   "review_count": 30500,
+   "specs": {
+    "RAM": "6 GB",
+    "Internal Storage": "128 GB",
+    "Display Type": "IPS LCD",
+    "5G": "Yes",
+    "Battery Capacity": "6000 mAh",
+    "Primary Camera": "50MP",
+    "Charging": "18W"
+   },
+   "offers": [
+    {
+     "store": "bazaarlane",
+     "price": 13499,
+     "mrp": 18199,
+     "url": "https://example.com/bazaarlane/p/demo-15"
+    },
+    {
+     "store": "cartwala",
+     "price": 14439,
+     "mrp": 18199,
+     "url": "https://example.com/cartwala/p/demo-15"
+    },
+    {
+     "store": "dealdeck",
+     "price": 13089,
+     "mrp": 18199,
+     "url": "https://example.com/dealdeck/p/demo-15"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-16",
+   "name": "Orbix Neo 12 Pro 5G",
+   "brand": "Orbix",
+   "category": "smartphones",
+   "image_url": null,
+   "rating": 4.4,
+   "review_count": 12800,
+   "specs": {
+    "RAM": "12 GB",
+    "Internal Storage": "256 GB",
+    "Display Type": "AMOLED",
+    "5G": "Yes",
+    "Battery Capacity": "5500 mAh",
+    "Primary Camera": "108MP",
+    "Charging": "67W"
+   },
+   "offers": [
+    {
+     "store": "dealdeck",
+     "price": 21999,
+     "mrp": 29699,
+     "url": "https://example.com/dealdeck/p/demo-16"
+    },
+    {
+     "store": "bazaarlane",
+     "price": 22879,
+     "mrp": 29699,
+     "url": "https://example.com/bazaarlane/p/demo-16"
+    },
+    {
+     "store": "cartwala",
+     "price": 22879,
+     "mrp": 29699,
+     "url": "https://example.com/cartwala/p/demo-16"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-17",
+   "name": "Kairo K2",
+   "brand": "Kairo",
+   "category": "smartphones",
+   "image_url": null,
+   "rating": 4.0,
+   "review_count": 41200,
+   "specs": {
+    "RAM": "4 GB",
+    "Internal Storage": "64 GB",
+    "Display Type": "IPS LCD",
+    "5G": "No",
+    "Battery Capacity": "5000 mAh",
+    "Primary Camera": "13MP"
+   },
+   "offers": [
+    {
+     "store": "dealdeck",
+     "price": 9999,
+     "mrp": 13499,
+     "url": "https://example.com/dealdeck/p/demo-17"
+    },
+    {
+     "store": "bazaarlane",
+     "price": 9399,
+     "mrp": 13499,
+     "url": "https://example.com/bazaarlane/p/demo-17"
+    },
+    {
+     "store": "cartwala",
+     "price": 9699,
+     "mrp": 13499,
+     "url": "https://example.com/cartwala/p/demo-17"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-18",
+   "name": "Kairo K7 5G",
+   "brand": "Kairo",
+   "category": "smartphones",
+   "image_url": null,
+   "rating": 4.2,
+   "review_count": 9100,
+   "specs": {
+    "RAM": "8 GB",
+    "Internal Storage": "128 GB",
+    "Display Type": "pOLED",
+    "5G": "Yes",
+    "Battery Capacity": "5000 mAh",
+    "Primary Camera": "64MP",
+    "Charging": "44W"
+   },
+   "offers": [
+    {
+     "store": "cartwala",
+     "price": 15999,
+     "mrp": 21599,
+     "url": "https://example.com/cartwala/p/demo-18"
+    },
+    {
+     "store": "dealdeck",
+     "price": 16319,
+     "mrp": 21599,
+     "url": "https://example.com/dealdeck/p/demo-18"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-19",
+   "name": "Lumo Edge 40 5G",
+   "brand": "Lumo",
+   "category": "smartphones",
+   "image_url": null,
+   "rating": 4.5,
+   "review_count": 6800,
+   "specs": {
+    "RAM": "12 GB",
+    "Internal Storage": "256 GB",
+    "Display Type": "AMOLED",
+    "5G": "Yes",
+    "Battery Capacity": "4600 mAh",
+    "Primary Camera": "50MP",
+    "Charging": "68W"
+   },
+   "offers": [
+    {
+     "store": "bazaarlane",
+     "price": 32999,
+     "mrp": 44499,
+     "url": "https://example.com/bazaarlane/p/demo-19"
+    },
+    {
+     "store": "cartwala",
+     "price": 32009,
+     "mrp": 44499,
+     "url": "https://example.com/cartwala/p/demo-19"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-20",
+   "name": "Lumo Edge 40 Lite 5G",
+   "brand": "Lumo",
+   "category": "smartphones",
+   "image_url": null,
+   "rating": 4.3,
+   "review_count": 4100,
+   "specs": {
+    "RAM": "8 GB",
+    "Internal Storage": "128 GB",
+    "Display Type": "AMOLED",
+    "5G": "Yes",
+    "Battery Capacity": "5000 mAh",
+    "Charging": "45W"
+   },
+   "offers": [
+    {
+     "store": "cartwala",
+     "price": 24999,
+     "mrp": 33699,
+     "url": "https://example.com/cartwala/p/demo-20"
+    },
+    {
+     "store": "dealdeck",
+     "price": 24249,
+     "mrp": 33699,
+     "url": "https://example.com/dealdeck/p/demo-20"
+    },
+    {
+     "store": "bazaarlane",
+     "price": 25499,
+     "mrp": 33699,
+     "url": "https://example.com/bazaarlane/p/demo-20"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-21",
+   "name": "Vantro V3",
+   "brand": "Vantro",
+   "category": "smartphones",
+   "image_url": null,
+   "rating": 3.9,
+   "review_count": 15200,
+   "specs": {
+    "RAM": "6 GB",
+    "Internal Storage": "128 GB",
+    "5G": "No",
+    "Battery Capacity": "6000 mAh",
+    "Primary Camera": "50MP"
+   },
+   "offers": [
+    {
+     "store": "bazaarlane",
+     "price": 11499,
+     "mrp": 15499,
+     "url": "https://example.com/bazaarlane/p/demo-21"
+    },
+    {
+     "store": "cartwala",
+     "price": 12299,
+     "mrp": 15499,
+     "url": "https://example.com/cartwala/p/demo-21"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-22",
+   "name": "Orbix Max 5G",
+   "brand": "Orbix",
+   "category": "smartphones",
+   "image_url": null,
+   "rating": 4.6,
+   "review_count": 3900,
+   "specs": {
+    "RAM": "16 GB",
+    "Internal Storage": "512 GB",
+    "Display Type": "LTPO AMOLED",
+    "5G": "Yes",
+    "Battery Capacity": "5400 mAh",
+    "Primary Camera": "200MP",
+    "Charging": "100W"
+   },
+   "offers": [
+    {
+     "store": "dealdeck",
+     "price": 44999,
+     "mrp": 60699,
+     "url": "https://example.com/dealdeck/p/demo-22"
+    },
+    {
+     "store": "cartwala",
+     "price": 43649,
+     "mrp": 60699,
+     "url": "https://example.com/cartwala/p/demo-22"
+    },
+    {
+     "store": "bazaarlane",
+     "price": 43649,
+     "mrp": 60699,
+     "url": "https://example.com/bazaarlane/p/demo-22"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-23",
+   "name": "Corebook 14 Intel Core i5 13th Gen (16 GB/512 GB SSD/Windows 11)",
+   "brand": "Corebook",
+   "category": "laptops",
+   "image_url": null,
+   "rating": 4.3,
+   "review_count": 3200,
+   "specs": {
+    "RAM": "16 GB",
+    "SSD Capacity": "512 GB",
+    "Storage Type": "SSD",
+    "Processor Name": "Core i5 13th Gen",
+    "Weight": "1.4 kg",
+    "Backlit Keyboard": "Yes",
+    "Operating System": "Windows 11",
+    "Dedicated Graphics": "No"
+   },
+   "offers": [
+    {
+     "store": "cartwala",
+     "price": 54989,
+     "mrp": 74199,
+     "url": "https://example.com/cartwala/p/demo-23"
+    },
+    {
+     "store": "bazaarlane",
+     "price": 51689,
+     "mrp": 74199,
+     "url": "https://example.com/bazaarlane/p/demo-23"
+    },
+    {
+     "store": "dealdeck",
+     "price": 53339,
+     "mrp": 74199,
+     "url": "https://example.com/dealdeck/p/demo-23"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-24",
+   "name": "Corebook 15 Ryzen 5 (8 GB/512 GB SSD/Windows 11)",
+   "brand": "Corebook",
+   "category": "laptops",
+   "image_url": null,
+   "rating": 4.1,
+   "review_count": 5800,
+   "specs": {
+    "RAM": "8 GB",
+    "SSD Capacity": "512 GB",
+    "Storage Type": "SSD",
+    "Processor Name": "Ryzen 5 7530U",
+    "Weight": "1.7 kg",
+    "Backlit Keyboard": "No",
+    "Operating System": "Windows 11"
+   },
+   "offers": [
+    {
+     "store": "bazaarlane",
+     "price": 42989,
+     "mrp": 57999,
+     "url": "https://example.com/bazaarlane/p/demo-24"
+    },
+    {
+     "store": "cartwala",
+     "price": 44709,
+     "mrp": 57999,
+     "url": "https://example.com/cartwala/p/demo-24"
+    },
+    {
+     "store": "dealdeck",
+     "price": 44709,
+     "mrp": 57999,
+     "url": "https://example.com/dealdeck/p/demo-24"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-25",
+   "name": "Lumina Air 13 (16 GB/1 TB SSD)",
+   "brand": "Lumina",
+   "category": "laptops",
+   "image_url": null,
+   "rating": 4.6,
+   "review_count": 1900,
+   "specs": {
+    "RAM": "16 GB",
+    "SSD Capacity": "1 TB",
+    "Storage Type": "SSD",
+    "Processor Name": "Lumina L3",
+    "Weight": "1.24 kg",
+    "Backlit Keyboard": "Yes",
+    "Operating System": "LuminaOS"
+   },
+   "offers": [
+    {
+     "store": "cartwala",
+     "price": 79989,
+     "mrp": 107999,
+     "url": "https://example.com/cartwala/p/demo-25"
+    },
+    {
+     "store": "dealdeck",
+     "price": 75189,
+     "mrp": 107999,
+     "url": "https://example.com/dealdeck/p/demo-25"
+    },
+    {
+     "store": "bazaarlane",
+     "price": 85589,
+     "mrp": 107999,
+     "url": "https://example.com/bazaarlane/p/demo-25"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-26",
+   "name": "Ravel Strix G15 Gaming (16 GB/512 GB SSD/RTX 4050)",
+   "brand": "Ravel",
+   "category": "laptops",
+   "image_url": null,
+   "rating": 4.4,
+   "review_count": 2700,
+   "specs": {
+    "RAM": "16 GB",
+    "SSD Capacity": "512 GB",
+    "Storage Type": "SSD",
+    "Processor Name": "Ryzen 7 7735HS",
+    "Dedicated Graphics": "Yes, 6 GB RTX 4050",
+    "Weight": "2.3 kg",
+    "Backlit Keyboard": "Yes",
+    "Operating System": "Windows 11"
+   },
+   "offers": [
+    {
+     "store": "dealdeck",
+     "price": 89989,
+     "mrp": 121499,
+     "url": "https://example.com/dealdeck/p/demo-26"
+    },
+    {
+     "store": "cartwala",
+     "price": 91789,
+     "mrp": 121499,
+     "url": "https://example.com/cartwala/p/demo-26"
+    },
+    {
+     "store": "bazaarlane",
+     "price": 93589,
+     "mrp": 121499,
+     "url": "https://example.com/bazaarlane/p/demo-26"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-27",
+   "name": "Ravel Vivo 14 (8 GB/256 GB SSD)",
+   "brand": "Ravel",
+   "category": "laptops",
+   "image_url": null,
+   "rating": 3.9,
+   "review_count": 8100,
+   "specs": {
+    "RAM": "8 GB",
+    "SSD Capacity": "256 GB",
+    "Storage Type": "SSD",
+    "Processor Name": "Core i3 12th Gen",
+    "Weight": "1.5 kg",
+    "Operating System": "Windows 11",
+    "Dedicated Graphics": "No"
+   },
+   "offers": [
+    {
+     "store": "cartwala",
+     "price": 34989,
+     "mrp": 47199,
+     "url": "https://example.com/cartwala/p/demo-27"
+    },
+    {
+     "store": "bazaarlane",
+     "price": 35689,
+     "mrp": 47199,
+     "url": "https://example.com/bazaarlane/p/demo-27"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-28",
+   "name": "Corebook Flip 14 2-in-1 (16 GB/512 GB SSD)",
+   "brand": "Corebook",
+   "category": "laptops",
+   "image_url": null,
+   "rating": 4.2,
+   "review_count": 980,
+   "specs": {
+    "RAM": "16 GB",
+    "SSD Capacity": "512 GB",
+    "Storage Type": "SSD",
+    "Processor Name": "Core i5 1335U",
+    "Weight": "1.5 kg",
+    "Backlit Keyboard": "Yes"
+   },
+   "offers": [
+    {
+     "store": "bazaarlane",
+     "price": 64989,
+     "mrp": 87699,
+     "url": "https://example.com/bazaarlane/p/demo-28"
+    },
+    {
+     "store": "dealdeck",
+     "price": 69539,
+     "mrp": 87699,
+     "url": "https://example.com/dealdeck/p/demo-28"
+    },
+    {
+     "store": "cartwala",
+     "price": 69539,
+     "mrp": 87699,
+     "url": "https://example.com/cartwala/p/demo-28"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-29",
+   "name": "Nexa Book Pro 16 (32 GB/1 TB SSD/RTX 4060)",
+   "brand": "Nexa",
+   "category": "laptops",
+   "image_url": null,
+   "rating": 4.5,
+   "review_count": 640,
+   "specs": {
+    "RAM": "32 GB",
+    "SSD Capacity": "1 TB",
+    "Storage Type": "SSD",
+    "Processor Name": "Core i7 13700H",
+    "Dedicated Graphics": "Yes",
+    "Weight": "2.1 kg",
+    "Backlit Keyboard": "Yes",
+    "Operating System": "Windows 11"
+   },
+   "offers": [
+    {
+     "store": "bazaarlane",
+     "price": 134989,
+     "mrp": 182199,
+     "url": "https://example.com/bazaarlane/p/demo-29"
+    },
+    {
+     "store": "cartwala",
+     "price": 130939,
+     "mrp": 182199,
+     "url": "https://example.com/cartwala/p/demo-29"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-30",
+   "name": "Nexa Book 14 Thin (16 GB/512 GB SSD)",
+   "brand": "Nexa",
+   "category": "laptops",
+   "image_url": null,
+   "rating": 4.3,
+   "review_count": 2300,
+   "specs": {
+    "RAM": "16 GB",
+    "SSD Capacity": "512 GB",
+    "Storage Type": "SSD",
+    "Processor Name": "Ryzen 7 7730U",
+    "Weight": "1.29 kg",
+    "Backlit Keyboard": "Yes",
+    "Operating System": "Windows 11",
+    "Dedicated Graphics": "No"
+   },
+   "offers": [
+    {
+     "store": "dealdeck",
+     "price": 58989,
+     "mrp": 79599,
+     "url": "https://example.com/dealdeck/p/demo-30"
+    },
+    {
+     "store": "bazaarlane",
+     "price": 61349,
+     "mrp": 79599,
+     "url": "https://example.com/bazaarlane/p/demo-30"
+    },
+    {
+     "store": "cartwala",
+     "price": 55449,
+     "mrp": 79599,
+     "url": "https://example.com/cartwala/p/demo-30"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-31",
+   "name": "Ravel Chromebook 11 (4 GB/64 GB eMMC)",
+   "brand": "Ravel",
+   "category": "laptops",
+   "image_url": null,
+   "rating": 3.8,
+   "review_count": 4400,
+   "specs": {
+    "RAM": "4 GB",
+    "Storage": "64 GB",
+    "Storage Type": "eMMC",
+    "Processor Name": "Celeron N4500",
+    "Weight": "1.1 kg",
+    "Operating System": "ChromeOS",
+    "Dedicated Graphics": "No"
+   },
+   "offers": [
+    {
+     "store": "cartwala",
+     "price": 18989,
+     "mrp": 25599,
+     "url": "https://example.com/cartwala/p/demo-31"
+    },
+    {
+     "store": "dealdeck",
+     "price": 18419,
+     "mrp": 25599,
+     "url": "https://example.com/dealdeck/p/demo-31"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-32",
+   "name": "Pulse Fit 3 AMOLED Smartwatch",
+   "brand": "Pulse",
+   "category": "smartwatches",
+   "image_url": null,
+   "rating": 4.1,
+   "review_count": 26800,
+   "specs": {
+    "Display Type": "AMOLED",
+    "Bluetooth Calling": "Yes",
+    "SpO2 Monitor": "Yes",
+    "GPS": "No",
+    "Water Resistance": "IP68",
+    "Battery Life": "Up to 7 Days"
+   },
+   "offers": [
+    {
+     "store": "bazaarlane",
+     "price": 2499,
+     "mrp": 3399,
+     "url": "https://example.com/bazaarlane/p/demo-32"
+    },
+    {
+     "store": "dealdeck",
+     "price": 2349,
+     "mrp": 3399,
+     "url": "https://example.com/dealdeck/p/demo-32"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-33",
+   "name": "Pulse Fit 3 Pro GPS",
+   "brand": "Pulse",
+   "category": "smartwatches",
+   "image_url": null,
+   "rating": 4.3,
+   "review_count": 7200,
+   "specs": {
+    "Display Type": "AMOLED",
+    "Bluetooth Calling": "Yes",
+    "SpO2 Monitor": "Yes",
+    "GPS": "Built-in",
+    "Water Resistance": "5 ATM, IP68",
+    "Battery Life": "Up to 10 Days"
+   },
+   "offers": [
+    {
+     "store": "cartwala",
+     "price": 4499,
+     "mrp": 6099,
+     "url": "https://example.com/cartwala/p/demo-33"
+    },
+    {
+     "store": "bazaarlane",
+     "price": 4359,
+     "mrp": 6099,
+     "url": "https://example.com/bazaarlane/p/demo-33"
+    },
+    {
+     "store": "dealdeck",
+     "price": 4679,
+     "mrp": 6099,
+     "url": "https://example.com/dealdeck/p/demo-33"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-34",
+   "name": "Tempo Active 2",
+   "brand": "Tempo",
+   "category": "smartwatches",
+   "image_url": null,
+   "rating": 3.9,
+   "review_count": 41200,
+   "specs": {
+    "Display Type": "TFT LCD",
+    "Bluetooth Calling": "Yes",
+    "SpO2 Monitor": "Yes",
+    "Water Resistance": "IP67",
+    "Battery Life": "Up to 5 Days"
+   },
+   "offers": [
+    {
+     "store": "bazaarlane",
+     "price": 1799,
+     "mrp": 2399,
+     "url": "https://example.com/bazaarlane/p/demo-34"
+    },
+    {
+     "store": "cartwala",
+     "price": 1749,
+     "mrp": 2399,
+     "url": "https://example.com/cartwala/p/demo-34"
+    },
+    {
+     "store": "dealdeck",
+     "price": 1919,
+     "mrp": 2399,
+     "url": "https://example.com/dealdeck/p/demo-34"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-35",
+   "name": "Tempo Trek GPS Outdoor Watch",
+   "brand": "Tempo",
+   "category": "smartwatches",
+   "image_url": null,
+   "rating": 4.4,
+   "review_count": 2100,
+   "specs": {
+    "Display Type": "AMOLED",
+    "GPS": "Yes",
+    "SpO2 Monitor": "Yes",
+    "Bluetooth Calling": "No",
+    "Water Resistance": "IP69",
+    "Battery Life": "Up to 14 Days"
+   },
+   "offers": [
+    {
+     "store": "dealdeck",
+     "price": 6999,
+     "mrp": 9399,
+     "url": "https://example.com/dealdeck/p/demo-35"
+    },
+    {
+     "store": "bazaarlane",
+     "price": 7279,
+     "mrp": 9399,
+     "url": "https://example.com/bazaarlane/p/demo-35"
+    },
+    {
+     "store": "cartwala",
+     "price": 7139,
+     "mrp": 9399,
+     "url": "https://example.com/cartwala/p/demo-35"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-36",
+   "name": "Aurex Watch S1",
+   "brand": "Aurex",
+   "category": "smartwatches",
+   "image_url": null,
+   "rating": 4.2,
+   "review_count": 9800,
+   "specs": {
+    "Display Type": "AMOLED",
+    "Bluetooth Calling": "Yes",
+    "SpO2 Monitor": "Yes",
+    "GPS": "No",
+    "Battery Life": "Up to 7 Days"
+   },
+   "offers": [
+    {
+     "store": "dealdeck",
+     "price": 3299,
+     "mrp": 4499,
+     "url": "https://example.com/dealdeck/p/demo-36"
+    },
+    {
+     "store": "cartwala",
+     "price": 3199,
+     "mrp": 4499,
+     "url": "https://example.com/cartwala/p/demo-36"
+    },
+    {
+     "store": "bazaarlane",
+     "price": 3199,
+     "mrp": 4499,
+     "url": "https://example.com/bazaarlane/p/demo-36"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-37",
+   "name": "Kairo Band 5",
+   "brand": "Kairo",
+   "category": "smartwatches",
+   "image_url": null,
+   "rating": 4.0,
+   "review_count": 15400,
+   "specs": {
+    "Display Type": "AMOLED",
+    "SpO2 Monitor": "Yes",
+    "Water Resistance": "5 ATM",
+    "Battery Life": "Up to 14 Days",
+    "Bluetooth Calling": "No"
+   },
+   "offers": [
+    {
+     "store": "cartwala",
+     "price": 1299,
+     "mrp": 1799,
+     "url": "https://example.com/cartwala/p/demo-37"
+    },
+    {
+     "store": "bazaarlane",
+     "price": 1389,
+     "mrp": 1799,
+     "url": "https://example.com/bazaarlane/p/demo-37"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-38",
+   "name": "Pulse Luxe Round (Rose Gold)",
+   "brand": "Pulse",
+   "category": "smartwatches",
+   "image_url": null,
+   "rating": 4.0,
+   "review_count": 1200,
+   "specs": {
+    "Display Type": "AMOLED",
+    "Bluetooth Calling": "Yes",
+    "SpO2 Monitor": "Yes",
+    "Battery Life": "Up to 5 Days"
+   },
+   "offers": [
+    {
+     "store": "bazaarlane",
+     "price": 3999,
+     "mrp": 5399,
+     "url": "https://example.com/bazaarlane/p/demo-38"
+    },
+    {
+     "store": "dealdeck",
+     "price": 3759,
+     "mrp": 5399,
+     "url": "https://example.com/dealdeck/p/demo-38"
+    },
+    {
+     "store": "cartwala",
+     "price": 3759,
+     "mrp": 5399,
+     "url": "https://example.com/cartwala/p/demo-38"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-39",
+   "name": "Nimbus Watch Ultra",
+   "brand": "Nimbus",
+   "category": "smartwatches",
+   "image_url": null,
+   "rating": 4.5,
+   "review_count": 860,
+   "specs": {
+    "Display Type": "LTPO AMOLED",
+    "Bluetooth Calling": "Yes",
+    "SpO2 Monitor": "Yes",
+    "GPS": "Dual-band GPS built-in",
+    "Water Resistance": "IP68",
+    "Battery Life": "Up to 12 Days"
+   },
+   "offers": [
+    {
+     "store": "bazaarlane",
+     "price": 9999,
+     "mrp": 13499,
+     "url": "https://example.com/bazaarlane/p/demo-39"
+    },
+    {
+     "store": "dealdeck",
+     "price": 10199,
+     "mrp": 13499,
+     "url": "https://example.com/dealdeck/p/demo-39"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-40",
+   "name": "Stride Glide 3 Running Shoes For Men (Grey)",
+   "brand": "Stride",
+   "category": "running-shoes",
+   "image_url": null,
+   "rating": 4.2,
+   "review_count": 12200,
+   "specs": {
+    "Ideal For": "Men",
+    "Cushioning": "High",
+    "Weight": "260 g",
+    "Upper Material": "Engineered Mesh"
+   },
+   "offers": [
+    {
+     "store": "dealdeck",
+     "price": 2499,
+     "mrp": 3399,
+     "url": "https://example.com/dealdeck/p/demo-40"
+    },
+    {
+     "store": "bazaarlane",
+     "price": 2549,
+     "mrp": 3399,
+     "url": "https://example.com/bazaarlane/p/demo-40"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-41",
+   "name": "Stride Glide 3 Running Shoes For Women (Pink)",
+   "brand": "Stride",
+   "category": "running-shoes",
+   "image_url": null,
+   "rating": 4.3,
+   "review_count": 6400,
+   "specs": {
+    "Ideal For": "Women",
+    "Cushioning": "High",
+    "Weight": "220 g",
+    "Upper Material": "Engineered Mesh"
+   },
+   "offers": [
+    {
+     "store": "cartwala",
+     "price": 2499,
+     "mrp": 3399,
+     "url": "https://example.com/cartwala/p/demo-41"
+    },
+    {
+     "store": "bazaarlane",
+     "price": 2669,
+     "mrp": 3399,
+     "url": "https://example.com/bazaarlane/p/demo-41"
+    },
+    {
+     "store": "dealdeck",
+     "price": 2669,
+     "mrp": 3399,
+     "url": "https://example.com/dealdeck/p/demo-41"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-42",
+   "name": "Kinetix Tempo Racer For Men",
+   "brand": "Kinetix",
+   "category": "running-shoes",
+   "image_url": null,
+   "rating": 4.4,
+   "review_count": 3100,
+   "specs": {
+    "Ideal For": "Men",
+    "Cushioning": "Medium",
+    "Weight": "210 g",
+    "Upper Material": "Knit Mesh"
+   },
+   "offers": [
+    {
+     "store": "bazaarlane",
+     "price": 3999,
+     "mrp": 5399,
+     "url": "https://example.com/bazaarlane/p/demo-42"
+    },
+    {
+     "store": "cartwala",
+     "price": 3879,
+     "mrp": 5399,
+     "url": "https://example.com/cartwala/p/demo-42"
+    },
+    {
+     "store": "dealdeck",
+     "price": 3759,
+     "mrp": 5399,
+     "url": "https://example.com/dealdeck/p/demo-42"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-43",
+   "name": "Kinetix Cloudstep Unisex Running Shoes",
+   "brand": "Kinetix",
+   "category": "running-shoes",
+   "image_url": null,
+   "rating": 4.5,
+   "review_count": 1800,
+   "specs": {
+    "Ideal For": "Men & Women",
+    "Cushioning": "High",
+    "Weight": "240 g",
+    "Upper Material": "Mesh"
+   },
+   "offers": [
+    {
+     "store": "dealdeck",
+     "price": 4999,
+     "mrp": 6699,
+     "url": "https://example.com/dealdeck/p/demo-43"
+    },
+    {
+     "store": "cartwala",
+     "price": 5099,
+     "mrp": 6699,
+     "url": "https://example.com/cartwala/p/demo-43"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-44",
+   "name": "Stride Daily Jog For Men",
+   "brand": "Stride",
+   "category": "running-shoes",
+   "image_url": null,
+   "rating": 3.9,
+   "review_count": 28800,
+   "specs": {
+    "Ideal For": "Men",
+    "Cushioning": "Low",
+    "Weight": "300 g",
+    "Upper Material": "Synthetic"
+   },
+   "offers": [
+    {
+     "store": "cartwala",
+     "price": 1299,
+     "mrp": 1799,
+     "url": "https://example.com/cartwala/p/demo-44"
+    },
+    {
+     "store": "dealdeck",
+     "price": 1219,
+     "mrp": 1799,
+     "url": "https://example.com/dealdeck/p/demo-44"
+    },
+    {
+     "store": "bazaarlane",
+     "price": 1219,
+     "mrp": 1799,
+     "url": "https://example.com/bazaarlane/p/demo-44"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-45",
+   "name": "Velo Trail Grip For Men",
+   "brand": "Velo",
+   "category": "running-shoes",
+   "image_url": null,
+   "rating": 4.1,
+   "review_count": 2200,
+   "specs": {
+    "Ideal For": "Men",
+    "Cushioning": "Medium",
+    "Weight": "320 g",
+    "Upper Material": "Synthetic, Mesh"
+   },
+   "offers": [
+    {
+     "store": "dealdeck",
+     "price": 3499,
+     "mrp": 4699,
+     "url": "https://example.com/dealdeck/p/demo-45"
+    },
+    {
+     "store": "cartwala",
+     "price": 3389,
+     "mrp": 4699,
+     "url": "https://example.com/cartwala/p/demo-45"
+    },
+    {
+     "store": "bazaarlane",
+     "price": 3389,
+     "mrp": 4699,
+     "url": "https://example.com/bazaarlane/p/demo-45"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-46",
+   "name": "Velo Featherlite For Women",
+   "brand": "Velo",
+   "category": "running-shoes",
+   "image_url": null,
+   "rating": 4.2,
+   "review_count": 4700,
+   "specs": {
+    "Ideal For": "Women",
+    "Cushioning": "Medium",
+    "Weight": "195 g",
+    "Upper Material": "Mesh"
+   },
+   "offers": [
+    {
+     "store": "dealdeck",
+     "price": 2999,
+     "mrp": 3999,
+     "url": "https://example.com/dealdeck/p/demo-46"
+    },
+    {
+     "store": "cartwala",
+     "price": 2909,
+     "mrp": 3999,
+     "url": "https://example.com/cartwala/p/demo-46"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-47",
+   "name": "Kinetix MaxCushion Pro For Men",
+   "brand": "Kinetix",
+   "category": "running-shoes",
+   "image_url": null,
+   "rating": 4.6,
+   "review_count": 920,
+   "specs": {
+    "Ideal For": "Men",
+    "Cushioning": "High",
+    "Weight": "270 g",
+    "Upper Material": "Engineered Mesh"
+   },
+   "offers": [
+    {
+     "store": "bazaarlane",
+     "price": 6499,
+     "mrp": 8799,
+     "url": "https://example.com/bazaarlane/p/demo-47"
+    },
+    {
+     "store": "cartwala",
+     "price": 6299,
+     "mrp": 8799,
+     "url": "https://example.com/cartwala/p/demo-47"
+    },
+    {
+     "store": "dealdeck",
+     "price": 6109,
+     "mrp": 8799,
+     "url": "https://example.com/dealdeck/p/demo-47"
+    }
+   ]
+  },
+  {
+   "external_id": "demo-48",
+   "name": "Stride Sprint Lite For Women",
+   "brand": "Stride",
+   "category": "running-shoes",
+   "image_url": null,
+   "rating": 4.0,
+   "review_count": 9800,
+   "specs": {
+    "Ideal For": "Women",
+    "Cushioning": "Medium",
+    "Upper Material": "Mesh"
+   },
+   "offers": [
+    {
+     "store": "dealdeck",
+     "price": 1799,
+     "mrp": 2399,
+     "url": "https://example.com/dealdeck/p/demo-48"
+    },
+    {
+     "store": "bazaarlane",
+     "price": 1919,
+     "mrp": 2399,
+     "url": "https://example.com/bazaarlane/p/demo-48"
+    },
+    {
+     "store": "cartwala",
+     "price": 1689,
+     "mrp": 2399,
+     "url": "https://example.com/cartwala/p/demo-48"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+# Deploys to the AWS server after CI passes on main.
+# Needs these repository secrets (Settings > Secrets and variables > Actions):
+#   DEPLOY_HOST     the server's public IP or domain
+#   DEPLOY_USER     e.g. ubuntu
+#   DEPLOY_SSH_KEY  private key that can log in as DEPLOY_USER
+name: Deploy
+
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          script: cd /var/www/shopmate && bash scripts/deploy.sh
+
+      - name: Check the site is healthy
+        run: |
+          sleep 5
+          curl --fail --silent --show-error "https://${{ secrets.DEPLOY_HOST }}/health" || curl --fail --silent --show-error "http://${{ secrets.DEPLOY_HOST }}/health"

@@ -1,0 +1,7 @@
+# Install with: crontab -e   (as www-data or the deploy user)
+
+# Laravel Scheduler: price refresh (6-hourly), price alerts (hourly), cleanup (daily).
+* * * * * cd /var/www/shopmate && php artisan schedule:run >> /dev/null 2>&1
+
+# Nightly database backup to S3, kept for 7 days.
+30 2 * * * /var/www/shopmate/scripts/backup.sh >> /var/log/shopmate-backup.log 2>&1
