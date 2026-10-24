@@ -2,7 +2,7 @@
 
 @section('admin')
 <h1 style="font-size:1.8rem">Operations</h1>
-<p class="muted">The last 7 days of searches, the checkout audit log and failed background jobs. Use it to spot problems before shoppers report them.</p>
+<p class="muted">The last 7 days of searches, the audit log and failed background jobs. Use it to spot problems before shoppers report them.</p>
 
 <div class="stat-row">
     <div class="stat"><b class="num">{{ (int) $summary->searches }}</b>Searches</div>
@@ -35,7 +35,7 @@
     </table>
 </div>
 
-<h2>Checkout audit log</h2>
+<h2>Audit log (checkout and partner API)</h2>
 <div class="table-wrap" style="margin-bottom:24px">
     <table class="data-table">
         <thead><tr><th>When</th><th>Event</th><th>Subject</th><th>Details</th></tr></thead>

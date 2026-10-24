@@ -1,5 +1,11 @@
 <?php
 
+use App\Services\Partners\Checks\ApiKeyCheck;
+use App\Services\Partners\Checks\IpAllowlistCheck;
+use App\Services\Partners\Checks\PartnerStatusCheck;
+use App\Services\Partners\Checks\RateLimitCheck;
+use App\Services\Partners\Checks\SignatureCheck;
+
 return [
 
     /*
@@ -66,4 +72,27 @@ return [
     'demo_simulate_prices' => (bool) env('DEMO_SIMULATE_PRICES', false),
 
     'admin_password' => env('ADMIN_PASSWORD'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Partner API
+    |--------------------------------------------------------------------------
+    | Retailers push their own prices. Every request passes these checks in
+    | order; the first failure stops it and is written to the audit log.
+    | Cheap checks run first, and the IP check runs before the signature,
+    | so a leaked key and secret are useless from an unknown address.
+    */
+    'partners' => [
+        'checks' => [
+            ApiKeyCheck::class,        // who is calling?
+            IpAllowlistCheck::class,   // from an allowed address?
+            SignatureCheck::class,     // signed, recent, and not replayed?
+            PartnerStatusCheck::class, // not suspended / read-only?
+            RateLimitCheck::class,     // within its own requests-per-minute?
+        ],
+        'max_clock_skew_seconds' => 300,
+        'max_items_per_request' => 100,
+        // Brute-force lockout: after this many failed authentications in a minute, an IP is refused.
+        'max_failed_attempts_per_minute' => 10,
+    ],
 ];

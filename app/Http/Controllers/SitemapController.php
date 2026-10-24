@@ -37,7 +37,9 @@ class SitemapController extends Controller
                 }
             });
 
-            return view('sitemap', ['urls' => $urls])->render();
+            // The XML declaration is added here, not in the Blade file: with PHP's
+            // short_open_tag setting switched on, "<?xml" inside a template is read as PHP code.
+            return '<?xml version="1.0" encoding="UTF-8"?>'."\n".view('sitemap', ['urls' => $urls])->render();
         });
 
         return response($xml, 200, ['Content-Type' => 'application/xml']);

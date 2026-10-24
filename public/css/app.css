@@ -426,6 +426,11 @@ label { font-weight: 700; display: block; margin-bottom: 6px; }
 .pill-done, .pill-completed, .pill-ok { background: var(--teal-soft); color: var(--teal); }
 .pill-failed, .pill-rejected { background: var(--red-soft); color: var(--red); }
 .pill-no_results, .pill-needs_clarification, .pill-expired { background: var(--note-bg); color: #6E5600; }
+.pill-active { background: var(--teal-soft); color: var(--teal); }
+.pill-read_only { background: var(--note-bg); color: #6E5600; }
+.pill-suspended { background: var(--red-soft); color: var(--red); }
+.status-form { display: flex; gap: 6px; flex-wrap: wrap; }
+.status-form .btn-small[aria-pressed="true"] { outline: 2px solid var(--ink); outline-offset: 1px; }
 
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }

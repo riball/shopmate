@@ -42,6 +42,7 @@ Built with **PHP 8.3 / Laravel 13, MySQL, HTML/CSS and jQuery**, deployable on *
 | System integration with booking/metasearch sites | Three data sources behind one `CatalogSource` interface (demo, private Flipkart export, DummyJSON API), Groq API, Frankfurter currency API |
 | Optimising processing | Denormalised best price, composite indexes, eager loading, caching, background jobs (details below) |
 | Improving UI / rebuilding PC and smartphone sites | Every page is designed for phone and desktop widths |
+| Security for partner integrations | Partner API with per-partner IP allowlists, HMAC-signed requests, replay protection, a per-partner kill switch, rate limits and an audit log (details below) |
 | AWS, infrastructure, maintenance | EC2/Lightsail + RDS + S3 guide, GitHub Actions CI/CD, nightly S3 backups, health checks, cleanup jobs |
 
 ---
@@ -158,6 +159,57 @@ All schedules are in `routes/console.php`; one cron line runs them (`deploy/cron
 
 ---
 
+## Partner API (security)
+
+Retailers can push their own prices to ShopMate, the way booking sites push reservations to a channel manager. Because many partners share one system, each partner is checked separately and can be switched off on its own without stopping the others.
+
+Every request to `/api/partner/v1/*` passes these checks in order (`config/shopmate.php` → `partners.checks`). The first failure stops it:
+
+| # | Check (class) | What it stops |
+|---|---|---|
+| 0 | Failed-attempt lockout (`PartnerGuard`) | An IP that fails authentication 10 times in a minute is refused, so keys and signatures can't be guessed at speed. Successful requests never count. |
+| 1 | `ApiKeyCheck` | Unknown or missing `X-Partner-Key` |
+| 2 | `IpAllowlistCheck` | Requests from outside the partner's registered IPs or CIDR ranges. An empty list blocks everything (fails closed). Runs before the signature check, so a leaked key and secret are useless from anywhere else. |
+| 3 | `SignatureCheck` | Missing or wrong HMAC-SHA256 signature, timestamps more than 5 minutes off, and replayed requests (each nonce works once, stored with an atomic `Cache::add`) |
+| 4 | `PartnerStatusCheck` | The kill switch: `suspended` partners are refused, `read_only` partners can read but not change prices |
+| 5 | `RateLimitCheck` | Each partner's own requests-per-minute limit |
+
+Each check is a small class behind one `PartnerCheck` interface, so adding a rule means writing one class and adding it to the list.
+
+- **Generic errors outside, exact reasons inside.** Callers who haven't proven who they are only get `401 unauthorized` and a request ID. The exact reason (`ip_not_allowed`, `bad_signature`, `replayed_nonce`, …) goes to the audit log and the admin **Partners** page.
+- **A partner can only touch its own store.** Updates for products the store doesn't sell are skipped, never applied (object-level authorization). Updates run in a transaction with row locks and record price history.
+- **The IP can't be faked.** `X-Forwarded-For` is only believed when it comes from a proxy listed in `TRUSTED_PROXIES` (`config/trustedproxy.php`). It used to trust every proxy (`'*'`), which would have let anyone claim an allowlisted IP with one header. A test checks that this stays fixed.
+- **Secrets are stored encrypted** (with `APP_KEY`), not hashed, because checking an HMAC needs the original secret. They are shown once at creation and can be rotated.
+
+**Signing a request.** Sign these five lines, joined with `\n`, using HMAC-SHA256 with the partner secret (hex output):
+
+```
+PUT
+/api/partner/v1/offers
+1761300000                      (X-Partner-Timestamp, Unix seconds)
+3f9c0d2a7b1e4c58a6d0e9f1b2c3d4e5 (X-Partner-Nonce, random, 16-64 chars)
+<sha256 hex of the raw body>
+```
+
+Send the result as `X-Partner-Signature`, together with `X-Partner-Key`, `X-Partner-Timestamp` and `X-Partner-Nonce`. `scripts/partner-request.sh` does this with `openssl` and `curl`.
+
+**Managing partners**
+
+```bash
+php artisan partner:create "CartWala feed" cartwala --ip=203.0.113.10 --ip=198.51.100.0/24 --rate=60
+php artisan partner:ips pk_... --add=203.0.113.0/24 --remove=203.0.113.10
+php artisan partner:status pk_... suspended          # or read_only / active (also buttons on /admin/partners)
+php artisan partner:rotate-secret pk_...
+
+PARTNER_KEY=pk_... PARTNER_SECRET=sk_... scripts/partner-request.sh GET http://127.0.0.1/api/partner/v1/offers
+PARTNER_KEY=pk_... PARTNER_SECRET=sk_... scripts/partner-request.sh PUT http://127.0.0.1/api/partner/v1/offers \
+  '{"offers":[{"product":"aurex-pods-lite-tws-earbuds-black","price":1199,"in_stock":true}]}'
+```
+
+`tests/Feature/PartnerApiTest.php` covers each rejection reason, the lockout, the kill switch and the cross-store rule.
+
+---
+
 ## Deploying on AWS
 
 The free plan gives new accounts credits for 6 months, so create the account when you're about to apply, not while building. Set a budget alert (AWS Budgets) on day one.
@@ -215,7 +267,9 @@ Real evidence that you listen to users. Fill this in after showing the site to 3
 ```
 app/
   Console/Commands/     products:import, prices:refresh, alerts:check, shopmate:cleanup, db:explain-browse
-  Http/Controllers/     pages, admin (SEO, ops), api (searches, products, alerts, cart mandates), health, sitemap
+  Console/Commands/     ... plus partner:create, partner:ips, partner:status, partner:rotate-secret
+  Http/Controllers/     pages, admin (SEO, ops, partners), api (searches, products, alerts, cart mandates, partner offers), health, sitemap
+  Http/Middleware/      AdminOnly, PartnerGuard (runs the partner security checks)
   Jobs/                 RunSearchPipeline (background search)
   Models/               Product, ProductOffer, SpecFact, PriceHistory, SearchSession, TraceStep, Claim, CartMandate, ...
   Services/
@@ -223,6 +277,7 @@ app/
     Pipeline/           runner, steps, verifier, trace, fact sheet, prompts
     Llm/                Groq client, offline AI, fallback wrapper
     Cart/               cart signing and checkout rules
+    Partners/           partner request signing, security checks, price updates, audit
 config/shopmate.php         AI, pipeline weights, mandate, data sources
 config/shopmate_specs.php   categories, spec label aliases, supported must-haves
 database/data/demo_catalog.json   fictional catalog (safe to publish)

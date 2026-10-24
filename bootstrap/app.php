@@ -13,8 +13,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        // Behind an AWS load balancer or proxy, trust its X-Forwarded-* headers.
-        $middleware->trustProxies(at: '*');
+        // Which proxies may set X-Forwarded-For is configured in config/trustedproxy.php
+        // (TRUSTED_PROXIES in .env). Trusting every proxy ('*') would let anyone fake
+        // their IP address and walk past the partner IP allowlist.
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

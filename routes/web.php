@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\OpsController;
+use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\SeoController;
 use App\Http\Controllers\HealthController;
 use App\Http\Controllers\PageController;
@@ -33,5 +34,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('seo/{type}/{id}', [SeoController::class, 'edit'])->whereNumber('id')->name('seo.edit');
         Route::put('seo/{type}/{id}', [SeoController::class, 'update'])->whereNumber('id')->name('seo.update');
         Route::get('ops', [OpsController::class, 'index'])->name('ops');
+        Route::get('partners', [PartnerController::class, 'index'])->name('partners.index');
+        Route::post('partners/{partner}/status', [PartnerController::class, 'updateStatus'])->name('partners.status');
     });
 });

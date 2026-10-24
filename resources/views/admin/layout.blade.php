@@ -6,6 +6,7 @@
         <strong>Admin</strong>
         <a href="{{ route('admin.seo.index') }}" @class(['active' => request()->routeIs('admin.seo.*')])>SEO</a>
         <a href="{{ route('admin.ops') }}" @class(['active' => request()->routeIs('admin.ops')])>Operations</a>
+        <a href="{{ route('admin.partners.index') }}" @class(['active' => request()->routeIs('admin.partners.*')])>Partners</a>
         <form method="post" action="{{ route('admin.logout') }}">@csrf<button class="link-btn" type="submit">Log out</button></form>
     </div>
 </div>
