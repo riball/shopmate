@@ -1,5 +1,7 @@
 # ShopMate
 
+live demo : [shopmate](http://shopmate.13-233-126-36.sslip.io/search/01a16f22-b3c1-7365-b38e-71ef082d91e1)
+
 A product comparison service for Indian shoppers. Describe what you want in plain English ("true wireless earbuds under ₹2,000 with a good mic"), and ShopMate compares stores, picks the 3 best products, and **checks every statement against the listing data before you see it**. Nothing is bought without your explicit approval.
 
 Built with **PHP 8.3 / Laravel 13, MySQL, HTML/CSS and jQuery**, deployable on **AWS**.
