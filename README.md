@@ -1,16 +1,24 @@
 # ShopMate
 
-live demo : [shopmate](http://shopmate.13-233-126-36.sslip.io/search/01a16f22-b3c1-7365-b38e-71ef082d91e1)
-
 A product comparison service for Indian shoppers. Describe what you want in plain English ("true wireless earbuds under ₹2,000 with a good mic"), and ShopMate compares stores, picks the 3 best products, and **checks every statement against the listing data before you see it**. Nothing is bought without your explicit approval.
 
-Built with **PHP 8.3 / Laravel 13, MySQL, HTML/CSS and jQuery**, deployable on **AWS**.
+Built with **PHP 8 / Laravel 13, MySQL, HTML/CSS and jQuery**, and **live on AWS EC2**: [shopmate.&lt;ip&gt;.sslip.io](http://shopmate.YOUR-IP-DASHES.sslip.io)
 
 ![Results page](docs/screenshots/results-desktop.png)
 
 | Browse with filters | Product page with store prices and history | Mobile, after the search was relaxed |
 |---|---|---|
 | ![Browse](docs/screenshots/browse.png) | ![Product](docs/screenshots/product.png) | ![Mobile](docs/screenshots/replan-mobile.png) |
+
+---
+
+## Background
+
+ShopMate started as our **agentic AI team project at university**, built in Python. I rebuilt it on my own in **PHP / Laravel and MySQL** to learn that stack properly, and used the rebuild to harden it:
+
+- **The AI never touches facts.** Prices, filtering and ranking are plain PHP, and every sentence the AI writes is checked against the product data before anyone sees it.
+- **Every partner request is verified.** A partner API lets retailers push their own prices, with IP allowlisting, HMAC-signed requests, replay protection and a per-partner kill switch.
+- **It runs in production.** It's deployed on AWS EC2, and the [deployment log](#deployment-log) lists the real problems I hit there and how I fixed them.
 
 ---
 
@@ -28,14 +36,15 @@ Built with **PHP 8.3 / Laravel 13, MySQL, HTML/CSS and jQuery**, deployable on *
 
 **For the site owner**
 - **SEO admin** (`/admin/seo`): edit title, description and keywords of any product, category or page, with a live Google-style preview.
-- **Operations view** (`/admin/ops`): searches in the last 7 days, failures, average speed, claims removed, checkout audit log, failed background jobs.
+- **Operations view** (`/admin/ops`): searches in the last 7 days, failures, average speed, claims removed, audit log, failed background jobs.
+- **Partners** (`/admin/partners`): every partner's allowed IPs, recent activity and rejections, and Active / Read-only / Suspended buttons (the kill switch).
 - **Health check** (`/health`) for uptime monitoring, plus a sitemap and robots.txt.
 
 ---
 
-## How it maps to the job description
+## Stack at a glance
 
-| Job requirement | Where it is in this project |
+| Skill | Where it is in this project |
 |---|---|
 | PHP, OOP | Pipeline steps are separate classes behind one `PipelineStep` interface; the AI sits behind an `LlmClient` interface with three implementations (Groq, offline, test) |
 | Laravel | Eloquent models and relationships (incl. polymorphic SEO), queues, scheduler, validation, rate limiting, mail, Artisan commands |
@@ -45,7 +54,7 @@ Built with **PHP 8.3 / Laravel 13, MySQL, HTML/CSS and jQuery**, deployable on *
 | Optimising processing | Denormalised best price, composite indexes, eager loading, caching, background jobs (details below) |
 | Improving UI / rebuilding PC and smartphone sites | Every page is designed for phone and desktop widths |
 | Security for partner integrations | Partner API with per-partner IP allowlists, HMAC-signed requests, replay protection, a per-partner kill switch, rate limits and an audit log (details below) |
-| AWS, infrastructure, maintenance | EC2/Lightsail + RDS + S3 guide, GitHub Actions CI/CD, nightly S3 backups, health checks, cleanup jobs |
+| AWS, infrastructure, maintenance | Live on EC2 (Ubuntu, Nginx, PHP-FPM, MySQL), production bugs found and fixed from the logs, security patch verification (see [deployment log](#deployment-log)); health check, cleanup jobs, and CI/CD and S3 backup scripts included |
 
 ---
 
@@ -140,7 +149,7 @@ Other sources: `--source=demo` (fictional, safe to publish) and `--source=dummyj
 php artisan test
 ```
 
-39 tests, no internet or API key needed (the AI is replaced by the offline or a scripted test AI). They cover the budget parser, spec cleaning, ranking, the full pipeline, clarification, replanning (including an invalid AI pick), the verifier rejecting wrong prices, invented numbers, made-up citations and made-up products, every cart refusal case, browse filters, price alerts, SEO admin and the DummyJSON + Frankfurter import.
+61 tests, no internet or API key needed (the AI is replaced by the offline or a scripted test AI). They cover the budget parser, spec cleaning, ranking, the full pipeline, clarification, replanning (including an invalid AI pick), the verifier rejecting wrong prices, invented numbers, made-up citations and made-up products, every cart refusal case, browse filters, price alerts, SEO admin, the DummyJSON + Frankfurter import, and every partner API rejection (unknown key, wrong IP, faked `X-Forwarded-For`, bad signature, old timestamp, replayed request, read-only, suspended, rate limit, lockout, another store's product).
 
 ---
 
@@ -212,21 +221,53 @@ PARTNER_KEY=pk_... PARTNER_SECRET=sk_... scripts/partner-request.sh PUT http://1
 
 ---
 
-## Deploying on AWS
+## Live deployment (AWS EC2)
 
-The free plan gives new accounts credits for 6 months, so create the account when you're about to apply, not while building. Set a budget alert (AWS Budgets) on day one.
+| Part | What's running |
+|---|---|
+| Server | One **EC2** instance (t3.small), Ubuntu 26.04 |
+| Web | **Nginx** → **PHP-FPM 8.5** (Unix socket), `root` set to `public/` so nothing else is reachable |
+| Database | **MySQL 8.4** on the same instance, with a separate app user that only has access to the `shopmate` database |
+| Firewall | Security group: SSH and HTTP only |
+| App settings | `APP_ENV=production`, `APP_DEBUG=false`, config/route/view caches built, `DEMO_SIMULATE_PRICES=true` (fictional catalog only) |
+| Address | `shopmate.<ip-with-dashes>.sslip.io`, a free hostname that points at the server's IP |
 
-**Cheapest setup (one server):** one Lightsail instance or small EC2 instance (Ubuntu) running Nginx, PHP-FPM and MySQL. **Resume-friendly setup:** the same server plus **RDS** for MySQL (costs more credits; share one RDS instance across all your projects).
+Updating the live site:
 
-1. **Server:** Ubuntu 24.04. Install `nginx`, `php8.3-fpm php8.3-mysql php8.3-mbstring php8.3-xml php8.3-curl php8.3-intl php8.3-bcmath`, `composer`, `supervisor`, `mysql-client`, `awscli` (and `mysql-server` if not using RDS).
+```bash
+cd /var/www/shopmate
+git pull
+php artisan migrate --force
+php artisan optimize:clear
+php artisan config:cache && php artisan route:cache && php artisan view:cache
+sudo chown -R ubuntu:www-data storage bootstrap/cache
+```
+
+**Not set up on the live server yet** (scripts and config are in the repo): HTTPS with certbot, the queue worker and cron scheduler (the live site runs searches inside the request with `QUEUE_CONNECTION=sync`), nightly S3 backups (`scripts/backup.sh`) and automatic deploys from GitHub Actions (`.github/workflows/`, `scripts/deploy.sh`).
+
+### Deployment log
+
+Real problems from running this in production, and what I did about them.
+
+| Problem | Cause | Fix |
+|---|---|---|
+| Every search returned **"Server Error"** on the live site, but worked locally | The Laravel log showed `SQLSTATE[22001]: Data too long for column 'llm_driver'`. The name "Offline AI (rule-based)" is 23 characters and the column was 20. SQLite (used locally) ignores string lengths; MySQL rejects the value. | New migration widening the column. Lesson: test against the same database engine you run in production. |
+| The partner IP allowlist could have been bypassed | The app trusted `X-Forwarded-For` from **any** proxy (`trustProxies(at: '*')`), so anyone could claim an allowlisted IP with one header | Only proxies listed in `TRUSTED_PROXIES` are trusted (none on EC2, where Nginx talks to PHP-FPM directly). A test sends a faked header and expects a rejection. |
+| `/sitemap.xml` crashed on some PHP setups | With PHP's `short_open_tag` setting on, `<?xml` inside a Blade template is read as PHP code | The XML declaration is now added in the controller, not the template. Tests pass with the setting on and off. |
+| **CVE-2026-109618 / 109619** ("php2shell"), critical PHP flaws disclosed October 2026 | Remote code execution on PHP servers; fixed in PHP 8.5.12 | `php -v` still said 8.5.4, so I checked the package changelog: Ubuntu's build `8.5.4-0ubuntu1.5` already includes the fix (a backport). I also applied the recommended extra mitigation, `session.upload_progress.enabled=0`. |
+| Pages failed after deploying | `storage/` and `bootstrap/cache/` weren't writable by the web server user | `chown ubuntu:www-data` plus group write permissions, repeated after every cache rebuild |
+
+### Setting up your own server
+
+1. **Server:** Ubuntu with `nginx`, `php-fpm` and the `php-mysql php-mbstring php-xml php-curl php-intl php-bcmath` extensions, `composer` and `mysql-server`.
 2. **Code:** `git clone` into `/var/www/shopmate`, then `composer install --no-dev --optimize-autoloader`, `cp .env.example .env`, set `APP_ENV=production`, `APP_DEBUG=false`, `APP_URL`, the `DB_*` values, `ADMIN_PASSWORD`, `MANDATE_SECRET` (any long random string), `php artisan key:generate`, `php artisan migrate --seed --force`. Make `storage/` and `bootstrap/cache/` writable by `www-data`.
-3. **Web server:** copy `deploy/nginx.conf` to `/etc/nginx/sites-available/shopmate`, enable it, reload Nginx. For HTTPS, run `certbot --nginx` once you have a domain.
-4. **Queue worker:** copy `deploy/shopmate-worker.conf` to `/etc/supervisor/conf.d/`, then `supervisorctl reread && supervisorctl update`.
-5. **Scheduler and backups:** add the two lines in `deploy/crontab.txt` with `crontab -e`. Create an S3 bucket, set `AWS_BUCKET`, and give the server an IAM role that can write to it.
-6. **Automatic deploys:** in GitHub → Settings → Secrets, add `DEPLOY_HOST`, `DEPLOY_USER`, `DEPLOY_SSH_KEY`. After that, every push to `main` runs tests and, if they pass, runs `scripts/deploy.sh` on the server (maintenance mode on, pull, migrate, rebuild caches, restart workers, maintenance mode off) and checks `/health`.
-7. **Monitoring:** point a free uptime monitor (or a CloudWatch alarm) at `https://your-domain/health`. It returns `503` if the database is down or jobs are stuck in the queue.
+3. **Web server:** start from `deploy/nginx.conf` (point `fastcgi_pass` at your PHP-FPM socket), enable it and reload Nginx. For HTTPS, run `certbot --nginx`.
+4. **Queue worker (optional):** copy `deploy/shopmate-worker.conf` to `/etc/supervisor/conf.d/`, then `supervisorctl reread && supervisorctl update`. Otherwise set `QUEUE_CONNECTION=sync`.
+5. **Scheduler and backups:** add the lines in `deploy/crontab.txt` with `crontab -e`. For backups, create an S3 bucket, set `AWS_BUCKET`, and give the instance an IAM role that can write to it.
+6. **Automatic deploys:** in GitHub → Settings → Secrets, add `DEPLOY_HOST`, `DEPLOY_USER`, `DEPLOY_SSH_KEY`. Every push to `main` then runs the tests and, if they pass, runs `scripts/deploy.sh` on the server and checks `/health`.
+7. **Monitoring:** point an uptime monitor or a CloudWatch alarm at `/health`. It returns `503` if the database is down or jobs are stuck in the queue.
 
-For the public demo, set `DEMO_SIMULATE_PRICES=true` so the fictional prices move a little and the history charts stay alive. Real data is never simulated.
+For a public demo, set `DEMO_SIMULATE_PRICES=true` so the fictional prices move a little and the history charts stay alive. Real data is never simulated.
 
 ---
 
@@ -249,18 +290,7 @@ See the plan and timing of the browse query:
 php artisan db:explain-browse smartphones --must=5g --max=20000
 ```
 
-**Before/after story to fill in for your interview:** drop the `products_category_id_best_price_index` index in a test copy, load the full Flipkart snapshot, run the command above, then add the index back and run it again. Note both timings and the `EXPLAIN` rows here.
-
----
-
-## User testing log
-
-Real evidence that you listen to users. Fill this in after showing the site to 3–5 people.
-
-| Who (role, phone/desktop) | Task given | What confused them | What I changed | Result after the change |
-|---|---|---|---|---|
-| | "Find earbuds under ₹2,000" | | | |
-| | | | | |
+To see the index at work, drop `products_category_id_best_price_index` in a test copy, run the command above, then add the index back and compare the `EXPLAIN` rows and timings.
 
 ---
 
@@ -268,8 +298,9 @@ Real evidence that you listen to users. Fill this in after showing the site to 3
 
 ```
 app/
-  Console/Commands/     products:import, prices:refresh, alerts:check, shopmate:cleanup, db:explain-browse
-  Console/Commands/     ... plus partner:create, partner:ips, partner:status, partner:rotate-secret
+  Console/Commands/     products:import, prices:refresh, alerts:check, shopmate:cleanup, db:explain-browse,
+                        partner:create, partner:ips, partner:status, partner:rotate-secret
+  Enums/                PartnerStatus (active / read_only / suspended)
   Http/Controllers/     pages, admin (SEO, ops, partners), api (searches, products, alerts, cart mandates, partner offers), health, sitemap
   Http/Middleware/      AdminOnly, PartnerGuard (runs the partner security checks)
   Jobs/                 RunSearchPipeline (background search)
@@ -280,7 +311,8 @@ app/
     Llm/                Groq client, offline AI, fallback wrapper
     Cart/               cart signing and checkout rules
     Partners/           partner request signing, security checks, price updates, audit
-config/shopmate.php         AI, pipeline weights, mandate, data sources
+config/shopmate.php         AI, pipeline weights, mandate, data sources, partner security checks
+config/trustedproxy.php     which proxies may set X-Forwarded-For
 config/shopmate_specs.php   categories, spec label aliases, supported must-haves
 database/data/demo_catalog.json   fictional catalog (safe to publish)
 public/css, public/js       hand-written CSS and jQuery (no build step)
@@ -291,5 +323,7 @@ deploy/, scripts/, .github/ server config, deploy and backup scripts, CI/CD
 
 - Product images in the demo catalog (currently category icons).
 - More data sources (a second real store) so cross-store comparison uses real prices.
-- Re-run the 66-request evaluation from the Python version against this PHP pipeline and publish the numbers here.
+- Re-run the 66-request evaluation from the original Python version against this PHP pipeline and publish the numbers here.
+- HTTPS, the queue worker, nightly S3 backups and automatic deploys on the live server.
+- Partner secret rotation with a grace period, so a partner can switch secrets without a moment of failed requests.
 - Redis for cache and queue once traffic justifies it.
