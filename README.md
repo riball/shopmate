@@ -2,13 +2,22 @@
 
 A product comparison service for Indian shoppers. Describe what you want in plain English ("true wireless earbuds under ₹2,000 with a good mic"), and ShopMate compares stores, picks the 3 best products, and **checks every statement against the listing data before you see it**. Nothing is bought without your explicit approval.
 
-Built with **PHP 8 / Laravel 13, MySQL, HTML/CSS and jQuery**, and **live on AWS EC2**: [shopmate.&lt;ip&gt;.sslip.io](http://shopmate.13-233-126-36.sslip.io)
+Built with **PHP 8 / Laravel 13, MySQL, HTML/CSS and jQuery**, and **live on AWS EC2**: [shopmate.13-233-126-36.sslip.io](http://shopmate.13-233-126-36.sslip.io)
 
 ![Results page](docs/screenshots/results-desktop.png)
 
 | Browse with filters | Product page with store prices and history | Mobile, after the search was relaxed |
 |---|---|---|
 | ![Browse](docs/screenshots/browse.png) | ![Product](docs/screenshots/product.png) | ![Mobile](docs/screenshots/replan-mobile.png) |
+
+### Quick tour of the code
+
+| Where | What it shows |
+|---|---|
+| [`app/Services/Pipeline/Steps`](app/Services/Pipeline/Steps) | Each step of a search is its own class (Planner, Searcher, Ranker, Explainer, Verifier...) behind one `PipelineStep` interface |
+| [`Verifier.php`, line 117](app/Services/Pipeline/Steps/Verifier.php#L117) | How code checks the AI: any number in an AI sentence that isn't a checked fact is rejected |
+| [Deployment log](#deployment-log) | Real problems from the live AWS server, their cause, and how I fixed them |
+| [Tests](#tests) | 61 automated tests, including every partner API security check |
 
 ---
 
@@ -19,6 +28,8 @@ ShopMate started as our **agentic AI team project at university**, built in Pyth
 - **The AI never touches facts.** Prices, filtering and ranking are plain PHP, and every sentence the AI writes is checked against the product data before anyone sees it.
 - **Every partner request is verified.** A partner API lets retailers push their own prices, with IP allowlisting, HMAC-signed requests, replay protection and a per-partner kill switch.
 - **It runs in production.** It's deployed on AWS EC2, and the [deployment log](#deployment-log) lists the real problems I hit there and how I fixed them.
+
+**Result:** live on AWS, 61 automated tests, and every partner request passes 5 security checks. It is a demo with 48 fictional products from 3 stores.
 
 ---
 
@@ -46,15 +57,15 @@ ShopMate started as our **agentic AI team project at university**, built in Pyth
 
 | Skill | Where it is in this project |
 |---|---|
-| PHP, OOP | Pipeline steps are separate classes behind one `PipelineStep` interface; the AI sits behind an `LlmClient` interface with three implementations (Groq, offline, test) |
+| PHP, OOP | Pipeline steps are separate classes behind one `PipelineStep` interface; the AI sits behind an `LlmClient` interface, so the AI service can be swapped (online, offline or test) without changing the pipeline |
 | Laravel | Eloquent models and relationships (incl. polymorphic SEO), queues, scheduler, validation, rate limiting, mail, Artisan commands |
 | SQL / MySQL | Normalised schema with indexes, `EXISTS` sub-queries for spec filters, transactions with row locking, aggregate reports, `db:explain-browse` command |
 | HTML, CSS, JavaScript, jQuery | Hand-written responsive CSS (no framework); jQuery for live search progress, filters, comparison table, modal, chart |
-| System integration with booking/metasearch sites | Three data sources behind one `CatalogSource` interface (demo, private Flipkart export, DummyJSON API), Groq API, Frankfurter currency API |
+| System integration with booking/metasearch sites | A partner API that lets stores push their own prices (see below), and three product data sources behind one `CatalogSource` interface |
 | Optimising processing | Denormalised best price, composite indexes, eager loading, caching, background jobs (details below) |
 | Improving UI / rebuilding PC and smartphone sites | Every page is designed for phone and desktop widths |
 | Security for partner integrations | Partner API with per-partner IP allowlists, HMAC-signed requests, replay protection, a per-partner kill switch, rate limits and an audit log (details below) |
-| AWS, infrastructure, maintenance | Live on EC2 (Ubuntu, Nginx, PHP-FPM, MySQL), production bugs found and fixed from the logs, security patch verification (see [deployment log](#deployment-log)); health check, cleanup jobs, and CI/CD and S3 backup scripts included |
+| AWS, infrastructure, maintenance | Live on EC2 (Ubuntu, Nginx, PHP-FPM, MySQL), production bugs found and fixed from the logs, security patch verification (see [deployment log](#deployment-log)); health check and scheduled cleanup jobs |
 
 ---
 
@@ -76,7 +87,7 @@ Planner (AI) → Clarify → Search (code) ⇄ Replan (AI picks, code checks; ma
 | Explain | AI | Writes short claims; each must cite a trace step and list its facts | `Steps/Explainer.php` |
 | Verify | code | Checks every fact (price, rating, reviews, rank, specs, must-haves, "within budget" against the **original** budget) and rejects any number in the text that isn't a checked fact. One rewrite; anything still wrong is deleted | `Steps/Verifier.php` |
 
-The search runs as a **background job** (queue), and the page polls for new trace steps every second, so progress appears live.
+The search can run as a **background job** (queue), and the page polls for new trace steps every second, so progress appears live. On the live server it currently runs inside the request (see [Live deployment](#live-deployment-aws-ec2)).
 
 **No API key needed.** With `GROQ_API_KEY` empty, a rule-based **offline AI** (`app/Services/Llm/OfflineLlm.php`) answers the same tasks. It is also the automatic fallback if Groq is down, and the trace says so when that happens.
 
@@ -121,27 +132,13 @@ Open http://localhost:8000. If you have Node installed, `composer dev` starts al
 
 **Use Groq instead of the offline AI:** put your key in `GROQ_API_KEY` and restart `queue:work`.
 
-### Your private Flipkart data
+### Other data sources
 
-Put one JSON file per category in `storage/app/private/flipkart/` (this folder is git-ignored, so it never reaches GitHub):
-
-```
-storage/app/private/flipkart/earphones.json
-storage/app/private/flipkart/smartphones.json
-storage/app/private/flipkart/laptops.json
-storage/app/private/flipkart/smartwatches.json
-storage/app/private/flipkart/running-shoes.json
-```
+The public site uses the fictional demo catalog (`--source=demo`, safe to publish). The importer also accepts a local JSON export kept off GitHub (`--source=local`, files in `storage/app/private/`, which is git-ignored) and a public demo API (`--source=dummyjson`, USD prices converted to rupees and labelled "approx."):
 
 ```bash
-php artisan products:import --source=local --captured-on=2026-10-08
+php artisan products:import --source=demo
 ```
-
-Field names are read from common scraper names (`title`/`name`, `price`/`selling_price`, `specifications`, ...). If your export uses others, add them to the `FIELDS` list in `app/Services/Catalog/Sources/LocalJsonSource.php`. If spec labels don't map, add aliases in `config/shopmate_specs.php`.
-
-**Keep Flipkart data off the public demo.** Their terms don't allow republishing it. Use it for local demos only; the public site uses the demo catalog.
-
-Other sources: `--source=demo` (fictional, safe to publish) and `--source=dummyjson` (public demo API; USD prices converted to rupees with Frankfurter and labelled "approx.").
 
 ### Tests
 
@@ -149,7 +146,7 @@ Other sources: `--source=demo` (fictional, safe to publish) and `--source=dummyj
 php artisan test
 ```
 
-61 tests, no internet or API key needed (the AI is replaced by the offline or a scripted test AI). They cover the budget parser, spec cleaning, ranking, the full pipeline, clarification, replanning (including an invalid AI pick), the verifier rejecting wrong prices, invented numbers, made-up citations and made-up products, every cart refusal case, browse filters, price alerts, SEO admin, the DummyJSON + Frankfurter import, and every partner API rejection (unknown key, wrong IP, faked `X-Forwarded-For`, bad signature, old timestamp, replayed request, read-only, suspended, rate limit, lockout, another store's product).
+61 tests, no internet or API key needed (the AI is replaced by the offline or a scripted test AI). They cover the budget parser, spec cleaning, ranking, the full pipeline, clarification, replanning (including an invalid AI pick), the verifier rejecting wrong prices, invented numbers, made-up citations and made-up products, every cart refusal case, browse filters, price alerts, SEO admin, the demo API import, and every partner API rejection (unknown key, wrong IP, faked `X-Forwarded-For`, bad signature, old timestamp, replayed request, read-only, suspended, rate limit, lockout, another store's product).
 
 ---
 
