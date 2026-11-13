@@ -60,8 +60,11 @@ jobs:
 
       # phpunit.xml uses in-memory SQLite by default; here the tests run on MySQL instead,
       # so MySQL-only problems (strict mode, types) are caught before deploying.
+      # No --env flag: with it, the values from .env (APP_ENV=local) stay loaded and override
+      # phpunit.xml, so Laravel would not know it is running tests (CSRF checks stay on).
+      # The DB_* values below are real environment variables, so MySQL is still used.
       - name: Tests (MySQL)
-        run: php artisan test --env=testing
+        run: php artisan test
         env:
           DB_CONNECTION: mysql
           DB_DATABASE: shopmate_test
