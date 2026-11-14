@@ -102,7 +102,7 @@ The search can run as a **background job** (queue), and the page polls for new t
 
 ## Run it locally (Windows)
 
-**You need:** PHP 8.3+, Composer and MySQL. The easiest way on Windows is [Laragon](https://laragon.org/) (includes all three). Git Bash works for every command below.
+**You need:** PHP 8.4+, Composer and MySQL. The easiest way on Windows is [Laragon](https://laragon.org/) (includes all three). Git Bash works for every command below.
 
 ```bash
 # 1. Get the code and install packages
@@ -160,7 +160,7 @@ php artisan test
 | Remove failed jobs older than a week | daily | `queue:prune-failed` |
 | Run searches in the background, retry if the worker crashes | on demand | queue job `RunSearchPipeline` |
 | Retry Groq on rate limits/server errors, then fall back to offline AI | per AI call | `GroqClient`, `ResilientLlm` |
-| Test, check code style, deploy, then check `/health` | every push to `main` | `.github/workflows/` |
+| Run all tests on MySQL and check code style | every push to `main` | `.github/workflows/ci.yml` |
 | Database backup to S3, keep 7 days | nightly 02:30 | `scripts/backup.sh` |
 
 All schedules are in `routes/console.php`; one cron line runs them (`deploy/crontab.txt`).
@@ -240,7 +240,7 @@ php artisan config:cache && php artisan route:cache && php artisan view:cache
 sudo chown -R ubuntu:www-data storage bootstrap/cache
 ```
 
-**Not set up on the live server yet** (scripts and config are in the repo): HTTPS with certbot, the queue worker and cron scheduler (the live site runs searches inside the request with `QUEUE_CONNECTION=sync`), nightly S3 backups (`scripts/backup.sh`) and automatic deploys from GitHub Actions (`.github/workflows/`, `scripts/deploy.sh`).
+**Not set up on the live server yet** (scripts and config are in the repo): HTTPS with certbot, the queue worker (the live site runs searches inside the request with `QUEUE_CONNECTION=sync`), nightly S3 backups (`scripts/backup.sh`) and automatic deploys from GitHub Actions (`.github/workflows/`, `scripts/deploy.sh`).
 
 ### Deployment log
 
